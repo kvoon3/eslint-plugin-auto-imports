@@ -42,7 +42,8 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "pnpm run build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "release": "npx bumpp && npm publish"
   },
   "devDependencies": {
     "@types/eslint": "^9.6.1",
