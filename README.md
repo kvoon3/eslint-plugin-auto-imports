@@ -1,7 +1,9 @@
 # eslint-plugin-auto-imports
 
+[![npm version](https://img.shields.io/npm/v/eslint-plugin-auto-imports.svg?color=black&labelColor=white&style=flat)](https://www.npmjs.com/package/eslint-plugin-auto-imports)
+
 > [!TIP]
-> This plugin requires `unplugin-auto-import` to be installed
+> This plugin requires [unplugin-auto-import](https://unplugin.unjs.io/showcase/unplugin-auto-import) to be installed
 
 ## Rules
 
