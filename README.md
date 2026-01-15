@@ -25,6 +25,8 @@ export default {
 
 ## Configuration
 
+### ESLint
+
 ```ts
 // eslint.config.js
 import autoImports from 'eslint-plugin-auto-imports'
@@ -40,8 +42,6 @@ export default [
   }
 ]
 ```
-
-## Custom Configuration
 
 With custom options:
 
@@ -60,6 +60,18 @@ export default [
     }
   }
 ]
+```
+
+### Oxlint
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "jsPlugins": ["eslint-plugin-auto-imports"],
+  "rules": {
+    "auto-imports/no-unnecessary-import": "error"
+  }
+}
 ```
 
 ## License
