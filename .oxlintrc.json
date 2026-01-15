@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "jsPlugins": ["./dist/index.mjs"],
+  "rules": {
+    "auto-imports/no-unnecessary-import": "error"
+  }
+}
