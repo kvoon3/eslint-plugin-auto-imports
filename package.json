@@ -2,6 +2,7 @@
   "name": "eslint-plugin-auto-imports",
   "type": "module",
   "version": "1.0.2",
+  "packageManager": "pnpm@9.15.6+sha512.139cab068fdf0b751268179ac5f909b5be72afb4a75c513d1905d151befc8977b593d3cf8671ed83d4d6637c5c94b98ffbce108125de4a5a27a31233601a99de",
   "description": "Disallow imports that are auto-imported",
   "author": "Kevin Kwong <kvoon@duck.com>",
   "license": "MIT",
@@ -33,9 +34,6 @@
   "engines": {
     "node": ">=18"
   },
-  "peerDependencies": {
-    "eslint": ">=8.0.0"
-  },
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
@@ -45,7 +43,11 @@
     "lint": "eslint .",
     "release": "npx bumpp && npm publish"
   },
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  },
   "devDependencies": {
+    "@antfu/eslint-config": "^7.0.0",
     "@types/eslint": "^9.6.1",
     "@types/node": "^25.0.3",
     "@typescript-eslint/parser": "^8.53.0",
@@ -61,6 +63,5 @@
     "vitest": "^4.0.16",
     "vue": "^3.5.26",
     "vue-tsc": "^3.2.2"
-  },
-  "packageManager": "pnpm@9.15.6+sha512.139cab068fdf0b751268179ac5f909b5be72afb4a75c513d1905d151befc8977b593d3cf8671ed83d4d6637c5c94b98ffbce108125de4a5a27a31233601a99de"
+  }
 }

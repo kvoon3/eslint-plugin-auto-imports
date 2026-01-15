@@ -1,19 +1,18 @@
-import autoImports from './dist/index.mjs'
-import { defineConfig } from 'eslint/config'
-import tseslint from 'typescript-eslint'
+/* eslint-disable antfu/no-import-dist */
+// @ts-check
 
-export default defineConfig([
-  {
-    ignores: ['**/dist/**', '**/node_modules/**', '**/*.d.ts', '**/*.mjs'],
+import antfu from '@antfu/eslint-config'
+import { globalIgnores } from 'eslint/config'
+import autoImports from './dist/index.mjs'
+
+export default antfu({}, {
+  files: ['playground/**/*.ts'],
+  plugins: {
+    'auto-imports': autoImports,
   },
-  ...tseslint.configs.recommended,
-  {
-    files: ['playground/**/*.ts'],
-    plugins: {
-      'auto-imports': autoImports,
-    },
-    rules: {
-      'auto-imports/no-unnecessary-import': 'error',
-    },
+  rules: {
+    'auto-imports/no-unnecessary-import': 'warn',
   },
-])
+}, globalIgnores([
+  '.unimport-items.json',
+]))

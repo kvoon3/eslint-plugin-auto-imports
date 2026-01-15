@@ -10,6 +10,6 @@ export default defineConfig({
       dumpUnimportItems: true,
       imports: ['vue'],
       dirs: ['./playground/composibles'],
-    })
-  ]
+    }),
+  ],
 })

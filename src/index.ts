@@ -15,7 +15,7 @@ export function createPlugin(opts: {
 }
 
 const plugin = createPlugin({
-  items: '.unimport-items.json'
+  items: '.unimport-items.json',
 })
 
 export default plugin
