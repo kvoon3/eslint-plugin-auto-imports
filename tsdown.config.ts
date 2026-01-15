@@ -9,7 +9,7 @@ export default defineConfig({
       dts: true,
       dumpUnimportItems: true,
       imports: ['vue'],
-      dirs: ['./playground/composibles'],
+      dirs: ['./playground/composables'],
     }),
   ],
 })
