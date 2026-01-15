@@ -1,6 +1,6 @@
 # eslint-plugin-auto-imports
 
-Automatically remove unnecessary imports that are already auto-imported by `unplugin-auto-import`.
+Automatically remove unnecessary imports that are already auto-imported by [unplugin-auto-import](https://unplugin.unjs.io/showcase/unplugin-auto-import).
 
 > [!TIP]
 > This plugin requires `unplugin-auto-import` to be installed
