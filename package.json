@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-auto-imports",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ESLint plugin to auto-remove imports that are auto-imported by unplugin-auto-import",
   "author": "Author Name <author.name@mail.com>",
   "license": "MIT",
