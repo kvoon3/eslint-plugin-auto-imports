@@ -1,4 +1,4 @@
-import { createNoUnnecessaryImportRule } from './rules/no-unnecessary-import'
+import { createRule } from './rules/no-unnecessary-import'
 
 export function createPlugin(opts: {
   items?: string
@@ -9,7 +9,7 @@ export function createPlugin(opts: {
       version: '1.0.0',
     },
     rules: {
-      'no-unnecessary-import': createNoUnnecessaryImportRule(opts),
+      'no-unnecessary-import': createRule(opts),
     },
   }
 }
