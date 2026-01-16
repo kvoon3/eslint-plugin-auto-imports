@@ -1,4 +1,5 @@
 import { ESLintUtils } from '@typescript-eslint/utils'
 
-// TODO
-export const createEslintRule = ESLintUtils.RuleCreator(name => `https://example.com/rule/${name}`)
+export const createEslintRule = ESLintUtils.RuleCreator(
+  name => `https://github.com/kvoon3/eslint-plugin-auto-imports/blob/main/src/rules/${name}.md`,
+)

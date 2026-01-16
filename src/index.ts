@@ -1,3 +1,4 @@
+import { name, version } from '../package.json'
 import { createRule } from './rules/no-unnecessary-import'
 
 export function createPlugin(opts: {
@@ -5,8 +6,8 @@ export function createPlugin(opts: {
 }) {
   return {
     meta: {
-      name: 'eslint-plugin-auto-imports',
-      version: '1.0.0',
+      name,
+      version,
     },
     rules: {
       'no-unnecessary-import': createRule(opts),

@@ -9,7 +9,7 @@
 
 | Rule                                 | Description                             | Fixable |
 | ------------------------------------ | --------------------------------------- | ------- |
-| `auto-imports/no-unnecessary-import` | Disallow imports that are auto-imported | ✅ Yes  |
+| [no-unnecessary-import](./src/rules/no-unnecessary-import.md) | Disallow imports that are auto-imported | ✅ Yes  |
 
 ## Prepare
 
