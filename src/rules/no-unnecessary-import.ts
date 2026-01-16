@@ -1,5 +1,7 @@
-import type { Rule } from 'eslint'
+import type { TSESTree } from '@typescript-eslint/utils'
+import type { RuleModule } from '@typescript-eslint/utils/ts-eslint'
 import { readFileSync } from 'node:fs'
+import { createEslintRule } from '../utils'
 
 interface Options {
   items?: string
@@ -10,23 +12,27 @@ interface AutoImportData {
   sourceToTypeNames: Map<string, Set<string>>
 }
 
-export function createRule(opts?: Options): Rule.RuleModule {
+export function createRule(opts?: Options): RuleModule<any> {
   const {
     items = '.unimport-items.json',
   } = opts || {}
 
-  return {
+  return createEslintRule({
+    name: 'no-unnecessary-import',
     meta: {
       type: 'suggestion',
       docs: {
         description: 'Disallow imports that are auto-imported',
-        category: 'Best Practices',
-        recommended: false,
       },
       fixable: 'code',
       hasSuggestions: false,
       schema: [],
+      messages: {
+        unnecessaryImport: 'Unnecessary import: {{names}}',
+        removeAutoImported: 'Remove auto-imported \'{{name}}\'',
+      },
     },
+    defaultOptions: [],
 
     create(context) {
       const data = loadData(items)
@@ -36,13 +42,13 @@ export function createRule(opts?: Options): Rule.RuleModule {
 
       const { sourceToNames, sourceToTypeNames } = data
       return {
-        ImportDeclaration(node) {
+        ImportDeclaration(node: TSESTree.ImportDeclaration) {
           const importSource = node.source.value
 
           if (typeof importSource !== 'string')
             return
 
-          const isTypeImport = (node as any).importKind === 'type'
+          const isTypeImport = node.importKind === 'type'
           const autoImportedNames = (isTypeImport ? sourceToTypeNames : sourceToNames).get(importSource)
 
           // Analyze the import specifiers
@@ -55,24 +61,24 @@ export function createRule(opts?: Options): Rule.RuleModule {
               const importedName = imported.type === 'Identifier' ? imported.name : String(imported.value)
               const localName = specifier.local.name
 
-              if (autoImportedNames?.has(importedName)) 
-                autoImportedSpecifiers.push({ importedName, localName, specifier, })
-              else 
-                manuallyImportedSpecifiers.push({ importedName, localName, specifier, })
+              if (autoImportedNames?.has(importedName))
+                autoImportedSpecifiers.push({ importedName, localName, specifier })
+              else
+                manuallyImportedSpecifiers.push({ importedName, localName, specifier })
             }
             else if (specifier.type === 'ImportDefaultSpecifier') {
               const localName = specifier.local.name
 
-              if (autoImportedNames?.has('default')) 
-                autoImportedSpecifiers.push({ importedName: 'default', localName, specifier, })
-              else 
-                manuallyImportedSpecifiers.push({ importedName: 'default', localName, specifier, })
+              if (autoImportedNames?.has('default'))
+                autoImportedSpecifiers.push({ importedName: 'default', localName, specifier })
+              else
+                manuallyImportedSpecifiers.push({ importedName: 'default', localName, specifier })
             }
             else if (specifier.type === 'ImportNamespaceSpecifier') {
               const localName = specifier.local.name
 
               // Namespace imports are rarely auto-imported, skip them
-              manuallyImportedSpecifiers.push({ importedName: '*', localName, specifier, })
+              manuallyImportedSpecifiers.push({ importedName: '*', localName, specifier })
             }
           }
 
@@ -81,7 +87,8 @@ export function createRule(opts?: Options): Rule.RuleModule {
             const unnecessaryNames = autoImportedSpecifiers.map(s => s.importedName).join(', ')
             context.report({
               node,
-              message: `Unnecessary import: ${unnecessaryNames}`,
+              messageId: 'unnecessaryImport',
+              data: { names: unnecessaryNames },
               fix(fixer) {
                 return fixer.remove(node)
               },
@@ -89,11 +96,10 @@ export function createRule(opts?: Options): Rule.RuleModule {
           }
           // If some specifiers are auto-imported, remove only those
           else if (autoImportedSpecifiers.length > 0) {
-            const unnecessaryNames = autoImportedSpecifiers.map(s => s.importedName).join(', ')
             for (const autoImport of autoImportedSpecifiers) {
               context.report({
                 node: autoImport.specifier,
-                message: `Remove auto-imported '{{name}}' (unnecessary: ${unnecessaryNames})`,
+                messageId: 'removeAutoImported',
                 data: { name: autoImport.importedName },
                 fix(fixer) {
                   if (node.specifiers.length === 1) {
@@ -137,7 +143,7 @@ export function createRule(opts?: Options): Rule.RuleModule {
         },
       }
     },
-  }
+  })
 }
 
 function loadData(itemsPath: string): AutoImportData | null {

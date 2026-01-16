@@ -56,7 +56,7 @@ declare global {
   const useAttrs: typeof import('vue').useAttrs
   const useCssModule: typeof import('vue').useCssModule
   const useCssVars: typeof import('vue').useCssVars
-  const useDouble: typeof import('./playground/composibles/useDouble').useDouble
+  const useDouble: typeof import('./playground/composables/useDouble').useDouble
   const useId: typeof import('vue').useId
   const useModel: typeof import('vue').useModel
   const useSlots: typeof import('vue').useSlots

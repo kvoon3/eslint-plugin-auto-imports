@@ -394,7 +394,7 @@
   {
     "name": "useDouble",
     "as": "useDouble",
-    "from": "/Users/kvoon/i/eslint-plugin-auto-imports/playground/composibles/useDouble.ts",
+    "from": "/Users/kvoon/i/eslint-plugin-auto-imports/playground/composables/useDouble.ts",
     "__source": "dir"
   }
 ]
