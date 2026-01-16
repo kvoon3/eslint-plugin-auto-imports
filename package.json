@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-auto-imports",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "packageManager": "pnpm@9.15.6+sha512.139cab068fdf0b751268179ac5f909b5be72afb4a75c513d1905d151befc8977b593d3cf8671ed83d4d6637c5c94b98ffbce108125de4a5a27a31233601a99de",
   "description": "Disallow imports that are auto-imported",
   "author": "Kevin Kwong <kvoon@duck.com>",
