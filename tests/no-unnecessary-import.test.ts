@@ -142,6 +142,14 @@ describe('no-unnecessary-import', () => {
       })
       expect(result.output).toMatchInlineSnapshot(`"import type {  Component } from "vue""`)
     })
+
+    it('should handle mixed value and type imports', async () => {
+      const { result } = await invalid({
+        code: 'import { ref, type Reactive } from "vue"',
+        errors: 1,
+      })
+      expect(result.output).toMatchInlineSnapshot(`"import {  type Reactive } from "vue""`)
+    })
   })
 
   describe('invalid cases - multiline imports', () => {
